@@ -67,7 +67,7 @@ public class ElasticService<T> : IElasticService<T>
             .Query(q => q
                 .Wildcard(w => w
                         .Field(fieldName)
-                        .Value($"*{searchString.ToLower()}*")  // lowercase обязательно, если keyword
+                        .Value($"*{searchString.ToLower()}*")
                 )
             )
         );
