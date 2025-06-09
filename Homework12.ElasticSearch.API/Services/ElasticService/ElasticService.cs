@@ -77,52 +77,6 @@ public class ElasticService<T> : IElasticService<T>
 
     public async Task<double> GetAvgId()
     {
-        // var response = await _client.SearchAsync<Note>(s => s
-        //     .Index("your-index")
-        //     .Size(0) // мы только агрегируем, документы не нужны
-        //     .RuntimeMappings(rm => rm
-        //         .Add("word_length", new RuntimeField
-        //         {
-        //             Type = "long",
-        //             Script = new Script()
-        //             {
-        //                 Source = """
-        //                              if (doc['message.keyword'].size() > 0) {
-        //                                  def words = doc['message.keyword'].value.splitOnToken(' ');
-        //                                  if (words.length > 0) {
-        //                                      emit(words[0].length());
-        //                                  }
-        //                              }
-        //                          """
-        //             }
-        //         })
-        //     )
-        //     .Aggregations(agg => agg
-        //         .Add("by_word_length", new TermsAggregation
-        //         {
-        //             Field = "word_length",
-        //             Size = 100,
-        //             Order = new Collection<KeyValuePair<Field, SortOrder>>
-        //             {
-        //                 new KeyValuePair<Field, SortOrder>("word_length", SortOrder.Asc)
-        //             }
-        //         })
-        //     )
-        // );
-        //
-        // var result = new Dictionary<int, long>();
-        // if (response.Aggregations.TryGetValue("by_word_length", out var agg) &&
-        //     agg is TermsAggregate<long> termAgg)
-        // {
-        //     foreach (var bucket in termAgg.Buckets)
-        //     {
-        //         if (bucket.Key.HasValue)
-        //             result[(int)bucket.Key.Value] = bucket.DocCount ?? 0;
-        //     }
-        // }
-        //
-        // return result;
-        
         var response = await _client
             .SearchAsync<Note>(search => search
                 .Index(_index)
