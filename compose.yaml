@@ -1,0 +1,36 @@
+﻿services:
+  homework12.elasticsearch.elastic:
+    container_name: homework12_elasticsearch_elastic
+    image: elasticsearch:8.15.0
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    networks:
+      - elk
+
+  homework12.elasticsearch.kibana:
+    container_name: homework12_elasticsearch_kibana
+    image: kibana:8.15.0
+    ports:
+      - "5601:5601"
+    depends_on:
+      - homework12.elasticsearch.elastic
+    environment:
+      - ELASTICSEARCH_URL=http://homework12.elasticsearch.elastic:9200
+      - ELASTICSEARCH_HOSTS=http://homework12.elasticsearch.elastic:9200
+    networks:
+      - elk
+
+
+
+
+volumes:
+  elasticsearch_data:
+
+networks:
+  elk:
+    driver: bridge

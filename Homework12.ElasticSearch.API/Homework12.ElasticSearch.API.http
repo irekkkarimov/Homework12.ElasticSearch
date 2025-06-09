@@ -1,0 +1,6 @@
+@Homework12.ElasticSearch.API_HostAddress = http://localhost:5020
+
+GET {{Homework12.ElasticSearch.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
